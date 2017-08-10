@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.lq.plat.link</groupId>
+        <artifactId>lq-plat-link-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../../lq-plat-link-parent/pom.xml</relativePath>
+    </parent>
+    <artifactId>lq-plat-link-web</artifactId>
+    <packaging>jar</packaging>
+    <name>lq-plat-link-web</name>
+    <url>http://maven.apache.org</url>
+
+    <dependencies>
+
+        <!-- spring boot 相关jar包 start -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+        <!-- data start -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+        <!-- 现在大部分都是前后台分离,不建议用模板 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+        <!-- 热部署依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <version>${spring.boot.version}</version>
+            <optional>true</optional>
+            <scope>true</scope>
+        </dependency>
+        <!-- TEST -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- spring boot 相关jar包 end -->
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.connector.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- data end -->
+
+
+
+
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>0.7.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.9</version>
+        </dependency>
+
+
+
+
+        <!--
+         用于集群对应的session管理
+        <dependency>
+             <groupId>org.springframework.session</groupId>
+             <artifactId>spring-session</artifactId>
+             <version>${spirng.session.version}</version>
+         </dependency>
+
+         -->
+
+       <!-- <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-jdbc</artifactId>
+        </dependency>-->
+
+
+
+
+        <!-- 文件上传及下载 -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons.fileupload.version}</version>
+        </dependency>
+
+
+        <!--  spring boot end -->
+        <dependency>
+            <groupId>com.sun.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>${sun.jna.version}</version>
+        </dependency>
+
+
+        <!-- 基础平台 start -->
+        <dependency>
+            <groupId>com.lq.plat.link</groupId>
+            <artifactId>lq-plat-config</artifactId>
+            <version>${lq.plat.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lq.plat.link</groupId>
+            <artifactId>lq-plat-file</artifactId>
+            <version>${lq.plat.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lq.plat.link</groupId>
+            <artifactId>lq-plat-base</artifactId>
+            <version>${lq.plat.version}</version>
+        </dependency>
+        <!-- 基础平台 end -->
+
+        <dependency>
+            <groupId>com.lq.plat.link</groupId>
+            <artifactId>lq-plat-link-model</artifactId>
+            <version>${lq.plat.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lq.plat.link</groupId>
+            <artifactId>lq-plat-link-entity</artifactId>
+            <version>${lq.plat.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lq.plat.link</groupId>
+            <artifactId>lq-plat-user</artifactId>
+            <version>${lq.plat.version}</version>
+        </dependency>
+
+
+        <!-- spring 社交 start -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>1.5.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-core</artifactId>
+            <version>1.1.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-config</artifactId>
+            <version>1.1.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-web</artifactId>
+            <version>1.1.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-security</artifactId>
+            <version>1.1.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.3</version>
+        </dependency>
+
+        <!-- spring 社交 end -->
+        <dependency>
+            <groupId>net.sf.ezmorph</groupId>
+            <artifactId>ezmorph</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+
+
+    </dependencies>
+    <build>
+        <finalName>lq-plat-link-web</finalName>
+        <plugins>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+
+</project>

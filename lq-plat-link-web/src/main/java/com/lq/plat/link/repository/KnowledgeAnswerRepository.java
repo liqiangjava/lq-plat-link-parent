@@ -25,34 +25,37 @@ public interface KnowledgeAnswerRepository extends PlatFormRepository<KnowledgeA
     public KnowledgeAnswer findKnowledgeAnserByQuestionIdAndCreateUser(Long questionId, Long createUser);
 
     /**
-     * select kqiu.username as payerUsername, -- 付款者名称
-     * kq.price as payerPrice, -- 付款者金额
-     * kq.title as payerQuestionTitle, -- 付款者问题标题
-     * payeria.name as payerAccountName, -- 付款者账户信息
-     * kaiu.username as payeeUsername, -- 收款者用户名
-     * kaiu.portrait as payeePortrait, -- 收款者头像
-     * kaiu.mobile as payeeMobile, -- 收款者手机号
-     * kaiu.email as payeeEmail,-- 收款者邮箱号
+     * select questionUser.username as payerUsername, -- 付款者名称
+     * question.price as payerPrice, -- 付款者金额
+     * question.title as payerQuestionTitle, -- 付款者问题标题
+     * payerAccount.name as payerAccountName, -- 付款者账户信息
+     * payerOrder.id as payerOrderId, -- 付款者订单ID
+     * answerUser.username as payeeUsername, -- 收款者用户名
+     * answerUser.portrait as payeePortrait, -- 收款者头像
+     * answerUser.mobile as payeeMobile, -- 收款者手机号
+     * answerUser.email as payeeEmail,-- 收款者邮箱号
      * payeeia.name as payeeAccountName, -- 收款者账户名称
      * payeeia.receivables_qrcode as payeeReceivablesQrcode  -- 收款者二维码
-     * from knowledge_question kq
-     * left join knowledge_answer ka
-     * on kq.id = ka.knowledge_question_id
-     * left join info_user kqiu
-     * on  kq.create_user = kqiu.id
-     * left join info_account payeria
-     * on kqiu.create_user = payeria.info_user_id
-     * left join info_user kaiu
-     * on ka.create_user = kaiu.id
+     * from knowledge_question question
+     * left join knowledge_answer answer
+     * on question.id = answer.knowledge_question_id
+     * left join info_user questionUser
+     * on  question.create_user = questionUser.id
+     * left join info_account payerAccount
+     * on questionUser.create_user = payerAccount.info_user_id
+     * left join info_order payerOrder
+     * on payerOrder.payer_user_id = questionUser.id
+     * left join info_user answerUser
+     * on answer.create_user = answerUser.id
      * left join info_account payeeia
-     * on kaiu.id = payeeia.info_user_id
-     * where ka.best_answers = true -- 最佳回答者
+     * on answerUser.id = payeeia.info_user_id
+     * where answer.best_answers = true -- 最佳回答者
      * and payeeia.status = 0    -- 收款者账户可用
-     * and kq.status = 2   -- 问题已解决
-     * order by ka.modify_time desc
+     * and question.status = 2   -- 问题已解决
+     * order by answer.modify_time desc
      */
-    @Query(value = "select kqiu.username as payerUsername,kq.price as payerPrice,kq.title as payerQuestionTitle,payeria.name as payerAccountName, kaiu.username as payeeUsername, kaiu.portrait as payeePortrait,kaiu.mobile as payeeMobile,kaiu.email as payeeEmail,payeeia.name as payeeAccountName,payeeia.receivables_qrcode as payeeReceivablesQrcode from knowledge_question kq left join knowledge_answer ka on kq.id = ka.knowledge_question_id left join info_user kqiu on  kq.create_user = kqiu.id left join info_account payeria on kqiu.create_user = payeria.info_user_id left join info_user kaiu on ka.create_user = kaiu.id left join info_account payeeia on kaiu.id = payeeia.info_user_id where ka.best_answers = true and payeeia.status = 0 and kq.status = 2 order by ka.modify_time desc  \n-- #pageable\n ",
-            countQuery = "SELECT COUNT(kqiu.username) from knowledge_question kq left join knowledge_answer ka on kq.id = ka.knowledge_question_id left join info_user kqiu on  kq.create_user = kqiu.id left join info_account payeria on kqiu.create_user = payeria.info_user_id left join info_user kaiu on ka.create_user = kaiu.id left join info_account payeeia on kaiu.id = payeeia.info_user_id where ka.best_answers = true and payeeia.status = 0 and kq.status = 2 order by ka.modify_time desc"
+    @Query(value = "select questionUser.username as payerUsername, question.price as payerPrice,  question.title as payerQuestionTitle,  payerAccount.name as payerAccountName,  payerOrder.id as payerOrderId,  answerUser.username as payeeUsername, answerUser.portrait as payeePortrait,  answerUser.mobile as payeeMobile,  answerUser.email as payeeEmail, payeeia.name as payeeAccountName,  payeeia.receivables_qrcode as payeeReceivablesQrcode   from knowledge_question question left join knowledge_answer answer  on question.id = answer.knowledge_question_id left join info_user questionUser on  question.create_user = questionUser.id left join info_account payerAccount on questionUser.create_user = payerAccount.info_user_id left join info_order payerOrder on payerOrder.payer_user_id = questionUser.id left join info_user answerUser on answer.create_user = answerUser.id  left join info_account payeeia on answerUser.id = payeeia.info_user_id where answer.best_answers = true  and payeeia.status = 0  and question.status = 2 order by answer.modify_time desc  \n-- #pageable\n ",
+            countQuery = "select count(questionUser.username) from knowledge_question question left join knowledge_answer answer  on question.id = answer.knowledge_question_id left join info_user questionUser on  question.create_user = questionUser.id left join info_account payerAccount on questionUser.create_user = payerAccount.info_user_id left join info_order payerOrder on payerOrder.payer_user_id = questionUser.id left join info_user answerUser on answer.create_user = answerUser.id  left join info_account payeeia on answerUser.id = payeeia.info_user_id where answer.best_answers = true  and payeeia.status = 0  and question.status = 2 order by answer.modify_time desc"
             , nativeQuery = true)
     public Page<BestResponderDto> findBestResponder(Pageable pageable);
 }

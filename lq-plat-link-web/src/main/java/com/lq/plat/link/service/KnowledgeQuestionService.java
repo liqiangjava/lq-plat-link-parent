@@ -24,4 +24,6 @@ public interface KnowledgeQuestionService {
     public Page<CurrentUserKnowledgeQuestionDto> queryCurrentUserKnowledgeQuestion(String title,Long userId, Pageable pageable);
 
     public String update(KnowledgeQuestionUpdatePara knowledgeQuestionUpdatePara);
+
+    public Page<KnowledgeQuestion> getTBAKnowledgeQuestions(Pageable pageable);
 }

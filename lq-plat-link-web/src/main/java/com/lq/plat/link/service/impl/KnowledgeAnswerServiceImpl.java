@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class KnowledgeAnswerServiceImpl implements KnowledgeAnswerService {
             }
             KnowledgeAnswer knowledgeAnswer = DTOUtils.map(knowledgeAnswerPara, KnowledgeAnswer.class);
             knowledgeAnswer.setKnowledgeQuestion(knowledgeQuestion);
-            knowledgeAnswer.setId( WebUtils.getIdWorker().nextId());
+            knowledgeAnswer.setId(WebUtils.getIdWorker().nextId());
             knowledgeAnswerRepository.save(knowledgeAnswer);
             return ConstantParaUtil.SUCCESS_CH;
         } catch (Exception e) {
@@ -81,15 +82,23 @@ public class KnowledgeAnswerServiceImpl implements KnowledgeAnswerService {
 
     }
 
+    @Transactional
     @Override
     public String updateKnowledgeQuestionsBestAnswers(Long answerId, Long questionId) {
-        KnowledgeAnswer knowledgeAnswer = knowledgeAnswerRepository.findKnowledgeAnserByQuestionIdAndCreateUser(questionId, answerId);
-        if (knowledgeAnswer == null) {
-            return ConstantParaUtil.NOT_SET_ANSWER_BY_QUESTION_CREATEUSER;
-        }
-        knowledgeAnswer.setBestAnswers(true);
         try {
+            KnowledgeAnswer knowledgeAnswer = knowledgeAnswerRepository.findKnowledgeAnserByQuestionIdAndCreateUser(questionId, answerId);
+            if (knowledgeAnswer == null) {
+                return ConstantParaUtil.NOT_SET_ANSWER_BY_QUESTION_CREATEUSER;
+            }
+            knowledgeAnswer.setBestAnswers(true);//最佳回答者
             knowledgeAnswerRepository.save(knowledgeAnswer);
+            KnowledgeQuestion knowledgeQuestion = knowledgeQuestionRepository.findOne(questionId);
+            if (knowledgeQuestion == null) {
+                return ConstantParaUtil.KNOWLEDGE_QUESTION_NO_EXISTS;
+            }
+            knowledgeQuestion.setStatus(2);//已解决
+            knowledgeQuestionRepository.save(knowledgeQuestion);
+
             return ConstantParaUtil.SUCCESS_UPDATE_CH;
         } catch (Exception e) {
             return ConstantParaUtil.FALSE_UPDATE_CH;
@@ -97,8 +106,8 @@ public class KnowledgeAnswerServiceImpl implements KnowledgeAnswerService {
     }
 
     @Override
-    public Page<BestResponderDto>findBestAnswer(Pageable pageable) {
-        Page<BestResponderDto> pageData =knowledgeAnswerRepository.findBestResponder(pageable);
+    public Page<BestResponderDto> findBestAnswer(Pageable pageable) {
+        Page<BestResponderDto> pageData = knowledgeAnswerRepository.findBestResponder(pageable);
         return pageData;
     }
 

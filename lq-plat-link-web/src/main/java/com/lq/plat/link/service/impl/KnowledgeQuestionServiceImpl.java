@@ -121,4 +121,9 @@ public class KnowledgeQuestionServiceImpl implements KnowledgeQuestionService {
             return ConstantParaUtil.FALSE_UPDATE_CH;
         }
     }
+
+    @Override
+    public Page<KnowledgeQuestion> getTBAKnowledgeQuestions(Pageable pageable) {
+        return knowledgeQuestionRepository.findByStatus(0,pageable);
+    }
 }

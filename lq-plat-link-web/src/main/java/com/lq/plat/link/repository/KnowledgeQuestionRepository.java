@@ -21,4 +21,7 @@ public interface KnowledgeQuestionRepository extends PlatFormRepository<Knowledg
     @Query("select kq from KnowledgeQuestion kq left join kq.knowledgeAnswers ka  where   kq.createUser =:userId or ka.createUser =:userId")
     public Page<KnowledgeQuestion> findCurrentUserKnowledgeQuestionByCreateUser(@Param("userId") Long userId, Pageable pageable);
 
+
+    @Query("select  kq from KnowledgeQuestion kq where kq.status =:status order by  kq.createDate desc")
+    public Page<KnowledgeQuestion> findByStatus(@Param("status") Integer status,Pageable pageable);
 }

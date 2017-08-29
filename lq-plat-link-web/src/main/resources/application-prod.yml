@@ -7,10 +7,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://47.93.60.223:3306/test?useUnicode=true&useSSL=false
-#    url: jdbc:mysql://47.93.60.223:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: root
-    password: LIqiang@123
+    url: jdbc:mysql:///test?useUnicode=true&useSSL=false
+    username:
+    password:
   jpa:
     hibernate:
       ddl-auto: update
@@ -34,6 +33,6 @@ pzx:
 
 
 rongyun:
-  appkey: tdrvipksthb85
-  appsecret: 3vlyPcOTuAIdmi
+  appkey:
+  appsecret:
 

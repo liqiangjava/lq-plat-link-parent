@@ -9,8 +9,8 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://47.93.60.223:3306/test?useUnicode=true&useSSL=false
 #    url: jdbc:mysql://47.93.60.223:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username:
-    password:
+    username: root
+    password: LIqiang@123
   jpa:
     hibernate:
       ddl-auto: update
@@ -32,6 +32,8 @@ pzx:
       app-id: wxd99431bbff8305a0
       app-secret: 60f78681d063590a469f1b297feff3c4
 
-gril:
-  cupSize: B
-  age: 18
+
+rongyun:
+  appkey: tdrvipksthb85
+  appsecret: 3vlyPcOTuAIdmi
+

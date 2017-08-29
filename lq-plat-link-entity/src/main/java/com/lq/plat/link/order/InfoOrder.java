@@ -3,10 +3,9 @@ package com.lq.plat.link.order;
 import com.lq.plat.link.BaseEntity;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author 李强
@@ -38,14 +37,19 @@ public class InfoOrder extends BaseEntity {
 
     /**
      * 订单状态:
-     ORDER_NONEPROCESS("未处理", 0),
-     ORDER_SUSSESS("支付成功", 1),
-     ORDER_FAIL("支付失败", 2),
-     ORDER_PROCESSING("处理中", 3),
-     ORDER_ERR("未知异常", 4);
+     * OrderStatusEnum
+     * ORDER_NONEPROCESS("未处理", 0),
+     * ORDER_SUSSESS("支付成功", 1),
+     * ORDER_FAIL("支付失败", 2),
+     * ORDER_PROCESSING("处理中", 3),
+     * ORDER_ERR("未知异常", 4);
+     * ORDER_OVER("订单完成",5);
      */
     private Integer status;
 
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "infoOrder")
+    private List<InfoOrderDetail> infoOrderDetails;
 
     public InfoOrder() {
     }
@@ -89,5 +93,13 @@ public class InfoOrder extends BaseEntity {
 
     public void setPayeeUserId(Long payeeUserId) {
         this.payeeUserId = payeeUserId;
+    }
+
+    public List<InfoOrderDetail> getInfoOrderDetails() {
+        return infoOrderDetails;
+    }
+
+    public void setInfoOrderDetails(List<InfoOrderDetail> infoOrderDetails) {
+        this.infoOrderDetails = infoOrderDetails;
     }
 }

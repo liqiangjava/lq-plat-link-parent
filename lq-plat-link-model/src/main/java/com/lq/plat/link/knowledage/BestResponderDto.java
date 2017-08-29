@@ -1,5 +1,6 @@
 package com.lq.plat.link.knowledage;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.math.BigDecimal;
@@ -12,6 +13,8 @@ import java.math.BigDecimal;
  */
 public class BestResponderDto {
 
+    @ApiModelProperty(value = "收款者ID")
+    private Long payeeUserId;
 
     //收款者用户名
     @ApiModelProperty(value = "收款者用户名")
@@ -21,13 +24,12 @@ public class BestResponderDto {
     @ApiModelProperty(value = "收款者头像")
     private String payeePortrait;
 
-
     //收款者手机号
-    @ApiModelProperty(value = "手机号")
+    @ApiModelProperty(value = "收款者手机号")
     private String payeeMobile;
 
     //收款者邮箱
-    @ApiModelProperty(value = "邮箱")
+    @ApiModelProperty(value = "收款者邮箱")
     private String payeeEmail;
 
     //收款者账户名称（方便查找对应账户信息）
@@ -41,6 +43,9 @@ public class BestResponderDto {
     //付款者名称
     @ApiModelProperty(value = "付款者名称")
     private String payerUsername;
+
+    @ApiModelProperty(value = "付款者ID")
+    private Long  payerUserId;
 
     //付款者金额
     @ApiModelProperty(value = "付款者金额")
@@ -100,7 +105,6 @@ public class BestResponderDto {
         this.payeeReceivablesQrcode = payeeReceivablesQrcode;
     }
 
-
     public String getPayerUsername() {
         return payerUsername;
     }
@@ -132,4 +136,7 @@ public class BestResponderDto {
     public void setPayerAccountName(String payerAccountName) {
         this.payerAccountName = payerAccountName;
     }
+
+
+
 }

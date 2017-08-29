@@ -151,6 +151,13 @@
             <artifactId>lq-plat-base</artifactId>
             <version>${lq.plat.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.lq.plat.link</groupId>
+            <artifactId>lq-plat-rongcloud</artifactId>
+            <version>${lq.plat.version}</version>
+        </dependency>
+
         <!-- 基础平台 end -->
 
         <dependency>
@@ -170,6 +177,17 @@
             <version>${lq.plat.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.lq.plat.link</groupId>
+            <artifactId>lq-plat-security</artifactId>
+            <version>${lq.plat.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lq.plat.link</groupId>
+            <artifactId>lq-plat-elasticsearch</artifactId>
+            <version>${lq.plat.version}</version>
+        </dependency>
 
         <!-- spring 社交 start -->
         <dependency>
@@ -209,7 +227,29 @@
             <artifactId>ezmorph</artifactId>
             <version>1.0.6</version>
         </dependency>
+        <!-- elasticsearch start -->
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>transport</artifactId>
+            <version>5.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>5.2.2</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <!-- elasticsearch end -->
 
     </dependencies>
     <build>

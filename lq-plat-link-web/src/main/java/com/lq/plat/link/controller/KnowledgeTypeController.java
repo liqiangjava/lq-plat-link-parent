@@ -27,7 +27,7 @@ import java.util.concurrent.Callable;
  * @date 2017/7/3
  */
 @RestController
-@Api(value = "知识类型服务", description = "知识类型服务接口")
+@Api(value = "知识点类型服务", description = "知识点类型服务接口")
 public class KnowledgeTypeController extends PlatformController {
 
     @Autowired

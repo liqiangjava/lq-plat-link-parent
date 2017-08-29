@@ -7,6 +7,6 @@ package com.lq.plat.link.service;
  */
 public interface InfoOrderService {
 
-    public String bestAnswersPayee(Long id);
+    public String bestAnswersPayee(Long orderid,Long payeeuserid);
 
 }

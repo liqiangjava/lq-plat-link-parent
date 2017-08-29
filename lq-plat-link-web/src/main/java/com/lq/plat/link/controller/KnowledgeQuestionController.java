@@ -30,7 +30,7 @@ import java.util.concurrent.Callable;
  * @date 2017/7/7
  */
 @RestController
-@Api(value = "知识问题服务", description = "知识问题服务接口")
+@Api(value = "知识点问题服务", description = "知识点问题服务接口")
 public class KnowledgeQuestionController extends PlatformController {
 
     @Autowired

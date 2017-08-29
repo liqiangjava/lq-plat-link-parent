@@ -57,7 +57,10 @@ public class FeedbackController extends PlatformController {
 
                     @Override
                     public ResponseEntity<PlatformResult> call() throws Exception {
-
+                        // 判断result是否报错
+                        if (result.hasErrors()) {
+                            return ApiUtils.validError(result);
+                        }
                         return ApiUtils.ok(feedbackService.save(DTOUtils.map(feedbackPara, SysFeedback.class)));
                     }
                 };

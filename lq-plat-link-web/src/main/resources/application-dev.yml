@@ -12,7 +12,7 @@ spring:
     password: 123456
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     database: MYSQL
     show-sql: true
     properties:
@@ -35,6 +35,7 @@ pzx:
       app-secret: 60f78681d063590a469f1b297feff3c4
 
 
-gril:
-  cupSize: B
-  age: 18
+rongyun:
+  appkey: k51hidwqk9ymb
+  appsecret: 9jlqsoXlzIP
+

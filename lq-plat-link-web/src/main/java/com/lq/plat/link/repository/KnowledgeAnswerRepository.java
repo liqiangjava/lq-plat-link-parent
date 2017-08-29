@@ -25,11 +25,16 @@ public interface KnowledgeAnswerRepository extends PlatFormRepository<KnowledgeA
     public KnowledgeAnswer findKnowledgeAnserByQuestionIdAndCreateUser(Long questionId, Long createUser);
 
     /**
-     * select questionUser.username as payerUsername, -- 付款者名称
+     * select
+     * questionUser.id as payerUserId,        -- 付款者ID
+     * questionUser.username as payerUsername, -- 付款者名称
+     * question.id as questionId,     -- 问题ID
      * question.price as payerPrice, -- 付款者金额
      * question.title as payerQuestionTitle, -- 付款者问题标题
      * payerAccount.name as payerAccountName, -- 付款者账户信息
      * payerOrder.id as payerOrderId, -- 付款者订单ID
+     * answer.id as answerId,        -- 回答ID
+     * answerUser.id as payeeUserId, -- 收款者ID
      * answerUser.username as payeeUsername, -- 收款者用户名
      * answerUser.portrait as payeePortrait, -- 收款者头像
      * answerUser.mobile as payeeMobile, -- 收款者手机号
@@ -54,8 +59,8 @@ public interface KnowledgeAnswerRepository extends PlatFormRepository<KnowledgeA
      * and question.status = 2   -- 问题已解决
      * order by answer.modify_time desc
      */
-    @Query(value = "select questionUser.username as payerUsername, question.price as payerPrice,  question.title as payerQuestionTitle,  payerAccount.name as payerAccountName,  payerOrder.id as payerOrderId,  answerUser.username as payeeUsername, answerUser.portrait as payeePortrait,  answerUser.mobile as payeeMobile,  answerUser.email as payeeEmail, payeeia.name as payeeAccountName,  payeeia.receivables_qrcode as payeeReceivablesQrcode   from knowledge_question question left join knowledge_answer answer  on question.id = answer.knowledge_question_id left join info_user questionUser on  question.create_user = questionUser.id left join info_account payerAccount on questionUser.create_user = payerAccount.info_user_id left join info_order payerOrder on payerOrder.payer_user_id = questionUser.id left join info_user answerUser on answer.create_user = answerUser.id  left join info_account payeeia on answerUser.id = payeeia.info_user_id where answer.best_answers = true  and payeeia.status = 0  and question.status = 2 order by answer.modify_time desc  \n-- #pageable\n ",
-            countQuery = "select count(questionUser.username) from knowledge_question question left join knowledge_answer answer  on question.id = answer.knowledge_question_id left join info_user questionUser on  question.create_user = questionUser.id left join info_account payerAccount on questionUser.create_user = payerAccount.info_user_id left join info_order payerOrder on payerOrder.payer_user_id = questionUser.id left join info_user answerUser on answer.create_user = answerUser.id  left join info_account payeeia on answerUser.id = payeeia.info_user_id where answer.best_answers = true  and payeeia.status = 0  and question.status = 2 order by answer.modify_time desc"
+    @Query(value = "select questionUser.id as payerUserId,questionUser.username as payerUsername,question.id as questionId,  question.price as payerPrice,  question.title as payerQuestionTitle,  payerAccount.name as payerAccountName,  payerOrder.id as payerOrderId,answer.id as answerId,  answerUser.id as payeeUserId, answerUser.username as payeeUsername, answerUser.portrait as payeePortrait,  answerUser.mobile as payeeMobile,  answerUser.email as payeeEmail, payeeia.name as payeeAccountName,  payeeia.receivables_qrcode as payeeReceivablesQrcode   from knowledge_question question left join knowledge_answer answer  on question.id = answer.knowledge_question_id left join info_user questionUser on  question.create_user = questionUser.id left join info_account payerAccount on questionUser.create_user = payerAccount.info_user_id left join info_order payerOrder on payerOrder.payer_user_id = questionUser.id left join info_user answerUser on answer.create_user = answerUser.id  left join info_account payeeia on answerUser.id = payeeia.info_user_id where answer.best_answers = true  and payeeia.status = 0  and question.status = 2 order by answer.modify_time desc  \n-- #pageable\n ",
+            countQuery = "select count(questionUser.id) from knowledge_question question left join knowledge_answer answer  on question.id = answer.knowledge_question_id left join info_user questionUser on  question.create_user = questionUser.id left join info_account payerAccount on questionUser.create_user = payerAccount.info_user_id left join info_order payerOrder on payerOrder.payer_user_id = questionUser.id left join info_user answerUser on answer.create_user = answerUser.id  left join info_account payeeia on answerUser.id = payeeia.info_user_id where answer.best_answers = true  and payeeia.status = 0  and question.status = 2 order by answer.modify_time desc"
             , nativeQuery = true)
     public Page<BestResponderDto> findBestResponder(Pageable pageable);
 }

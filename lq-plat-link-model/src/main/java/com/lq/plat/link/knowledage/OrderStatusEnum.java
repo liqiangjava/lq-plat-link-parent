@@ -12,12 +12,12 @@ import java.util.Map;
  */
 public enum OrderStatusEnum {
 
-
     ORDER_NONEPROCESS("未处理", 0),
     ORDER_SUSSESS("支付成功", 1),
     ORDER_FAIL("支付失败", 2),
     ORDER_PROCESSING("处理中", 3),
-    ORDER_ERR("未知异常", 4);
+    ORDER_ERR("未知异常", 4),
+    ORDER_OVER("订单完成", 5);
 
 
     private OrderStatusEnum(String desc, int value) {

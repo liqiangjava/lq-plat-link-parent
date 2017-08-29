@@ -3,6 +3,7 @@ package com.lq.plat.link.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.lq.plat.link.aspect.ServiceLog;
 import com.lq.plat.link.aspect.ServiceLogAspect;
+import com.lq.plat.link.aspect.ServiceSysNotify;
 import com.lq.plat.link.common.Constant;
 import com.lq.plat.link.knowledage.CurrentUserKnowledgeQuestionDto;
 import com.lq.plat.link.knowledage.KnowledgeQuestionUpdatePara;
@@ -53,6 +54,7 @@ public class KnowledgeQuestionServiceImpl implements KnowledgeQuestionService {
     private InfoOrderRepository infoOrderRepository;
 
     @Override
+    @ServiceSysNotify(event = "abcd",status = "efhj")
     public String save(KnowledgeQuestion knowledgeQuestion) {
         try {
             knowledgeQuestion.setId( WebUtils.getIdWorker().nextId());

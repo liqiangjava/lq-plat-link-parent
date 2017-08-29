@@ -18,8 +18,9 @@ import java.util.Collection;
 
 
 /**
- * @author zhailiang
- *
+ * @author 李强
+ * @version 1.0.0
+ * @date 2017/8/15
  */
 @Component
 @Aspect

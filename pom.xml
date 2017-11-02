@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.4.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.lq.plat.link</groupId>
+    <artifactId>lq-plat-link-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>lq-plat-link-parent</name>
+    <url>http://maven.apache.org</url>
+    <description>李强平台系统</description>
+
+
+    <!-- 开发者信息 -->
+    <developers>
+        <developer>
+            <id>1</id>
+            <name>liqiang</name>
+            <email>qiang.li@cuixiaomei.com</email>
+            <url></url>
+        </developer>
+    </developers>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <maven-surefire-plugin>2.18.1</maven-surefire-plugin>
+        <lq.plat.version>0.0.1-SNAPSHOT</lq.plat.version>
+        <project.version>0.0.1-SNAPSHOT</project.version>
+        <swagger.version>2.7.0</swagger.version>
+        <spring.boot.version>1.5.4.RELEASE</spring.boot.version>
+        <spirng.session.version>1.3.1.RELEASE</spirng.session.version>
+        <hibernate.core.version>5.0.12.Final</hibernate.core.version>
+        <mysql.connector.version>5.1.42</mysql.connector.version>
+        <swagger2.version>2.7.0</swagger2.version>
+        <sun.jna.version>3.0.9</sun.jna.version>
+        <spring.security.oauth2.version>2.0.14.RELEASE</spring.security.oauth2.version>
+        <commons.fileupload.version>1.3.1</commons.fileupload.version>
+        <fastjson.version>1.1.40</fastjson.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- spring 社交 start -->
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-core</artifactId>
+            <version>1.1.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-config</artifactId>
+            <version>1.1.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-web</artifactId>
+            <version>1.1.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-security</artifactId>
+            <version>1.1.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.3</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <build>
+        <finalName>lq-plat-link-parent</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+
+            <!-- test插件, 仅测试名称为*Test的类, 使用支持分组测试的surefire-junit47 driver -->
+            <!--	<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${maven-surefire-plugin}</version>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.maven.surefire</groupId>
+                    <artifactId>surefire-junit47</artifactId>
+                    <version>${maven-surefire-plugin}</version>
+                </dependency>
+            </dependencies>-->
+            <!--	<configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>*BaseTest.java</exclude>
+                    </excludes>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <forkMode>always</forkMode>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <skip>true</skip>
+                </configuration>-->
+            <!--	</plugin>-->
+        </plugins>
+    </build>
+
+    <!-- multiple Module -->
+    <modules>
+        <!-- 平台基础模块 -->
+        <module>lq-plat-base</module>
+        <module>lq-plat-config</module>
+        <module>lq-plat-file</module>
+        <module>lq-plat-entity</module>
+        <module>lq-plat-model</module>
+        <module>lq-plat-user</module>
+        <module>lq-plat-security</module>
+        <module>lq-plat-rongcloud</module>
+        <module>lq-plat-elasticsearch</module>
+        <module>lq-plat-cache</module>
+        <module>lq-plat-mail</module>
+        <module>lq-plat-mq</module>
+        <!-- 业务模块 -->
+        <module>lq-plat-link-model</module>
+        <module>lq-plat-link-entity</module>
+
+        <module>lq-plat-link-web</module>
+
+    </modules>
+
+</project>

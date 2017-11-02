@@ -2,6 +2,7 @@ package com.lq.plat.link.repository;
 
 import com.lq.plat.link.knowledage.MonthBestResponderDto;
 import com.lq.plat.link.utils.DTOUtils;
+import com.lq.plat.link.utils.collect.Lists;
 import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;

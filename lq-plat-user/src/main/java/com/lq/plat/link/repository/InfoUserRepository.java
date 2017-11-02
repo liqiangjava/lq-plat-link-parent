@@ -38,4 +38,8 @@ public interface InfoUserRepository extends PlatFormRepository<InfoUser> {
     @Modifying
     @Query("update InfoUser u set u.status = :status where u.id = :id")
     void updateStatusById(@Param("status") Integer status,@Param("id") Long id);
+
+    @Modifying
+    @Query("update InfoUser u set u.portrait = :portrait , u.position = :position ,u.sex = :sex where u.id = :id")
+    void update(@Param("portrait") String portrait,@Param("position") String position,@Param("sex")  String sex,@Param("id")   Long id);
 }

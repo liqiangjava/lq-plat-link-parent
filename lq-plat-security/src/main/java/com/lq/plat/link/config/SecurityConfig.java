@@ -155,6 +155,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()  //url权限认证
 
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()//就是这一行啦,对OPTIONS中Preflight进行过滤
                 /****************** 默认 START ********************/
                 .antMatchers(
                         /****************** swagger START ********************/
@@ -192,15 +193,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 ).permitAll() //  这些方法认何人都可以访问,
 
-
-                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()//就是这一行啦,对OPTIONS中Preflight进行过滤
-                /****************** 配置平台角色 START ********************/
+                 /****************** 配置平台角色 START ********************/
                 .antMatchers("/admin/inforoles")
                 .access("hasAuthority('platform','manage')")
                 /****************** 配置平台角色 END ********************/
 
                 /****************** 配置admin角色 START ********************/
-                .antMatchers("/admin/**/**", "/admin/**")
+                .antMatchers("/admin/**")
+                .access("hasAuthority('admin')")
+                .antMatchers("/admin/**/**")
                 .access("hasAuthority('admin')")
                 // .hasAnyRole("admin")  对应的角色前缀 "ROLE_"
                 /****************** 配置admin角色 END ********************/

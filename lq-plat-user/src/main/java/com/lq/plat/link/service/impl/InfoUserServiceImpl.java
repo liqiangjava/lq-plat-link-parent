@@ -14,15 +14,22 @@ import com.lq.plat.link.user.InfoUserPara;
 import com.lq.plat.link.utils.ApiUtils;
 import com.lq.plat.link.utils.ConstantParaUtil;
 import com.lq.plat.link.utils.DTOUtils;
+import com.lq.plat.link.utils.StringUtil;
 import com.lq.plat.link.utils.WebUtils;
+import com.lq.plat.link.utils.security.SecurityUtils;
 import com.lq.plat.link.utils.security.UserSecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author 李强
@@ -111,25 +118,20 @@ public class InfoUserServiceImpl implements InfoUserService {
 
     }
 
+    @Transactional
     @Override
     public String update(InfoUserPara infoUserPara) {
         try {
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String username = userDetails.getUsername();
-            InfoUser infoUser = infoUserRepository.findByMobileOrEmail(username,ConstantParaUtil.USE);
-            //如果当前新,旧密码同时为空时的操作
-            if (StringUtils.isEmpty(infoUserPara.getOldPassword()) && StringUtils.isEmpty(infoUserPara.getPassword())) {
-                InfoUser ninfoUser = conversionInfoUser(infoUserPara, infoUser);
-                infoUserRepository.save(ninfoUser);
-            } else if (!StringUtils.isEmpty(infoUserPara.getOldPassword()) && !StringUtils.isEmpty(infoUserPara.getPassword())) {
-                //当前新,旧密码都不为空时,判断旧密码与原密码是否一致
-                String oPassword = new BCryptPasswordEncoder().encode(infoUserPara.getOldPassword());
-                InfoUser ninfoUser = conversionInfoUser(infoUserPara, infoUser);
-                if (!oPassword.equals(infoUser.getPassword())) {
-                    return ConstantParaUtil.FALSE_ORIGINAL_PASSWORD;
+
+                if(!StringUtils.isEmpty(userDetails.getUsername())){
+
+                   // infoUserRepository.update(ninfoUser.getPortrait(),ninfoUser.getPosition(),ninfoUser.getSex(),UserSecurityUtils.getInfoUserId());
+                    InfoUser ninfoUser = conversionInfoUser(UserSecurityUtils.getInfoUser(),infoUserPara);
+                    ninfoUser.setId(UserSecurityUtils.getInfoUserId());
+                    infoUserRepository.save(ninfoUser);
+
                 }
-                ninfoUser.setPassword(new BCryptPasswordEncoder().encode(infoUserPara.getPassword()));
-            }
             return ConstantParaUtil.SUCCESS_UPDATE_CH;
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,16 +143,15 @@ public class InfoUserServiceImpl implements InfoUserService {
      * 转化参数
      *
      * @param infoUserPara
-     * @param infoUser
      * @return
      */
-    private InfoUser conversionInfoUser(InfoUserPara infoUserPara, InfoUser infoUser) {
-        InfoUser nInfoUser = infoUser;
-
+    private InfoUser conversionInfoUser(InfoUser nInfoUser,InfoUserPara infoUserPara) {
+        if(!StringUtils.isEmpty(infoUserPara.getDataSign())){
+            nInfoUser.setDataSign(infoUserPara.getDataSign());
+        }
         if (!StringUtils.isEmpty(infoUserPara.getUsername())) {
             nInfoUser.setUsername(infoUserPara.getUsername());
         }
-
         if (!StringUtils.isEmpty(infoUserPara.getDescription())) {
             nInfoUser.setDescription(infoUserPara.getDescription());
         }
@@ -163,7 +164,21 @@ public class InfoUserServiceImpl implements InfoUserService {
         if (!StringUtils.isEmpty(infoUserPara.getPosition())) {
             nInfoUser.setPosition(infoUserPara.getPosition());
         }
-
+        if (!StringUtils.isEmpty(infoUserPara.getLoginModel())){
+            nInfoUser.setLoginModel(infoUserPara.getLoginModel());
+        }
+        switch (infoUserPara.getLoginModel()) {
+            case 1:
+                if(!StringUtils.isEmpty(infoUserPara.getEmail())){
+                    nInfoUser.setEmail(infoUserPara.getEmail());
+                }
+                break;
+            case 2:
+                if(!StringUtils.isEmpty(infoUserPara.getMobile())){
+                    nInfoUser.setMobile(infoUserPara.getMobile());
+                }
+                break;
+        }
         return nInfoUser;
     }
 

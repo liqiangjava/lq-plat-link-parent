@@ -32,7 +32,7 @@ public class InfoUser extends BaseEntity {
     @Column(unique = true)
     private String email;
 
-    //登录类型(手机方式:1,邮箱:2,其它:3)
+    //登录类型(手机方式:1手机:2邮箱,其它:3)
     private Integer loginModel;
 
     //用户名

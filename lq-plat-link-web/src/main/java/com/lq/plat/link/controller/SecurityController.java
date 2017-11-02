@@ -51,7 +51,6 @@ public class SecurityController extends PlatformController {
                         try {
                             SavedRequest savedRequest = requestCache.getRequest(request, response);
                             /*if (savedRequest != null) {
-
                                 String targetUrl = savedRequest.getRedirectUrl();
                                 Long userId = UserSecurityUtils.getInfoUserId();
                                 if (userId != null && !userId.equals("")) {

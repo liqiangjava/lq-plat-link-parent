@@ -4,6 +4,8 @@ import com.lq.plat.link.PlatFormCorsConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @author 李强
  * @version 1.0.0
@@ -19,5 +21,6 @@ public class CorsConfig extends PlatFormCorsConfig {
                 .allowCredentials(true)
                 .allowedMethods("GET", "POST", "DELETE", "PUT","OPTIONS")
                 .maxAge(3600);
+
     }
 }

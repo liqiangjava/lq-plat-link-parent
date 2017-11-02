@@ -15,9 +15,9 @@ import javax.crypto.spec.SecretKeySpec;
 public class Aes {
     private static String KEY_ALGORITHM = "AES";
     private static String CIPHER_ALGORITHM = "AES/ECB/PKCS5Padding";
-    private static final byte[] SECURE_KEY = StringUtils.getBytesUtf8("Joehe@Lk&#08$Aes");
-    public static final String PLUGIN_SECURE_KEY = "Joehe@Et&#08$Aes";
-    public static final String CONNECT_SECURE_KEY = "Joehe@Ct&#91$Aes";
+    private static final byte[] SECURE_KEY = StringUtils.getBytesUtf8("lq@qualper&#08$Aes");
+    public static final String PLUGIN_SECURE_KEY = "lq@Et&#08$Aes";
+    public static final String CONNECT_SECURE_KEY = "lq@Ct&#91$Aes";
 
     public static String encrypt(String inputStr)
             throws Exception

@@ -55,7 +55,7 @@ public class ApiUtils {
     {
         try
         {
-            return ok(Aes.encrypt(id, "Joehe@Et&#08$Aes"));
+            return ok(Aes.encrypt(id, "lq@Et&#08$Aes"));
         }
         catch (Exception e)
         {
@@ -78,7 +78,7 @@ public class ApiUtils {
     {
         try
         {
-            return Aes.decrypt(id, "Joehe@Et&#08$Aes");
+            return Aes.decrypt(id, "lq@Et&#08$Aes");
         }
         catch (Exception e)
         {

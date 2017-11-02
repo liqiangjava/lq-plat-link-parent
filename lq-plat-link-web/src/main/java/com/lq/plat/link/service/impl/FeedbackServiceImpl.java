@@ -8,7 +8,9 @@ import com.lq.plat.link.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 李强
@@ -24,6 +26,8 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public List<SysFeedback> findAll() {
+        Map map = new HashMap();
+
         return feedbackRepository.findAll();
     }
 

@@ -72,9 +72,9 @@ public class WebUtils {
         String para = StringUtils.join(paras, "&");
         if (url.indexOf("?") == -1) {
             url = url.replaceAll("/$", "");
-            url = String.format("%s?%s", new Object[]{url, para});
+            url = String.format("%s?%s", url, para);
         } else {
-            url = String.format("%s&%s", new Object[]{url, para});
+            url = String.format("%s&%s", url, para);
         }
         return url;
     }

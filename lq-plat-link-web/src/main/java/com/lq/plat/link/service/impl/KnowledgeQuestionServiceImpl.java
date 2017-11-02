@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -81,10 +82,12 @@ public class KnowledgeQuestionServiceImpl implements KnowledgeQuestionService {
     @Override
     @ServiceLog
     public Page<KnowledgeQuestion> queryKnowledgeQuestion(KnowledgeQuestion knowledgeQuestion, Pageable pageable) {
+
         Page<KnowledgeQuestion> pageData = knowledgeQuestionRepository.findAll(new KnowledgeQuestionSpec(knowledgeQuestion), pageable);
         LOGGER.info(JSON.toJSONString(pageData.getContent()));
         return pageData;
     }
+
 
     @Override
     public Page<CurrentUserKnowledgeQuestionDto> queryCurrentUserKnowledgeQuestion(String title,Long userId, Pageable pageable) {

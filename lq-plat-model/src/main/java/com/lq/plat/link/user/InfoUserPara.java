@@ -23,7 +23,7 @@ public class InfoUserPara extends BaseModel {
     private String email;
 
     //登录类型
-    @ApiModelProperty(value = "登录类型")
+    @ApiModelProperty(value = "登录类型,1为手机，2为邮箱")
     @NotNull(message = "登录类型不能为空")
     private Integer loginModel;
 
@@ -31,12 +31,7 @@ public class InfoUserPara extends BaseModel {
     @ApiModelProperty(value = "用户名")
     private String username;
 
-    //密码
-    @ApiModelProperty(value = "密码")
-    private String password;
 
-    @ApiModelProperty(value = "旧密码")
-    private String oldPassword;
 
     //描述
     @ApiModelProperty(value = "描述")
@@ -87,13 +82,7 @@ public class InfoUserPara extends BaseModel {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getDescription() {
         return description;
@@ -127,11 +116,5 @@ public class InfoUserPara extends BaseModel {
         this.position = position;
     }
 
-    public String getOldPassword() {
-        return oldPassword;
-    }
 
-    public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
-    }
 }

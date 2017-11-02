@@ -49,7 +49,7 @@ public class InfoUserController extends PlatformController {
     private InfoUserService infoUserService;
 
     @ApiOperation(value = "用户信息查询", notes = "查询用户返回的结果")
-    @GetMapping("admin/infousers/")
+    @GetMapping("admin/infousers/info")
     @ApiResponses({
             @ApiResponse(code = PlatformConstants.API_RESPONSE_SUCCESS_CODE, message = PlatformConstants.API_RESPONSE_SUCCESS_MESSAGE, response = InfoUserDto.class),
             @ApiResponse(code = PlatformConstants.API_RESPONSE_FALSE_CODE, message = PlatformConstants.API_RESPONSE_FALSE_MESSAGE, response = PlatformResult.class)

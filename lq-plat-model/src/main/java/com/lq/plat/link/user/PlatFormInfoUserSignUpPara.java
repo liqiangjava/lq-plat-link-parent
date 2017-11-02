@@ -23,7 +23,7 @@ public class PlatFormInfoUserSignUpPara {
     @NotNull(message = "用户确认密码不能为空")
     private String password2;
 
-    @ApiModelProperty(value = "登录类型(手机方式:1,邮箱:2,其它:3)")
+    @ApiModelProperty(value = "登录类型(1为手机方式,2为邮箱,3为其它)")
     private Integer model = 1;
 
     public String getUsername() {
